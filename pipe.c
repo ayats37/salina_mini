@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ouel-afi <ouel-afi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 16:34:44 by taya              #+#    #+#             */
-/*   Updated: 2025/06/27 15:55:58 by ouel-afi         ###   ########.fr       */
+/*   Updated: 2025/07/03 13:51:19 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,9 @@ int	execute_pipe(t_tree *node, t_env **envlist, int last_status)
 	close(pipe_fd[1]);
 	waitpid(pid1, &status1, 0);
 	waitpid(pid2, &status2, 0);
-	return (WEXITSTATUS(status2));
+	if (WIFEXITED(status2))
+		return (WEXITSTATUS(status2));
+	else if (WIFSIGNALED(status2))
+		return (128 + WTERMSIG(status2));
+	return (1);
 }

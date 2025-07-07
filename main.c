@@ -6,7 +6,7 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 14:31:55 by taya              #+#    #+#             */
-/*   Updated: 2025/06/27 17:01:03 by taya             ###   ########.fr       */
+/*   Updated: 2025/07/07 12:49:11 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,7 @@ int main(int argc, char **argv, char **env)
         
         if (check_errors(token_list) == 1)
         {
+						last_exit_status = 258;
             free(input);
             free_token_list(token_list);
             continue;

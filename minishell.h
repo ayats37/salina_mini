@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ouel-afi <ouel-afi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 12:58:09 by ouel-afi          #+#    #+#             */
-/*   Updated: 2025/06/27 15:55:28 by ouel-afi         ###   ########.fr       */
+/*   Updated: 2025/07/03 13:56:31 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,8 +175,8 @@ int	handle_fork_error(pid_t pid1, int pipe_fd[2]);
 int	execute_pipe(t_tree *node, t_env **envlist, int last_status);
 
 void	handle_heredoc_redir(t_token *redir);
-void	handle_input_redir(t_token *redir);
-void	handle_output_redir(t_token *redir);
+int	handle_input_redir(t_token *redir);
+int	handle_output_redir(t_token *redir);
 int	handle_redirection(t_tree *node);
 
 int						is_builtin(char *cmd);
@@ -199,6 +199,6 @@ char **expand_variables(char **tokens, int last_exit_status, t_env *env_list);
 
 void free_token_list(t_token *token_list);
 void free_token_list(t_token *token_list);
-
+void	write_error_no_exit(char *command, char *message);
 
 #endif

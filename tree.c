@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tree.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ouel-afi <ouel-afi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 10:51:02 by taya              #+#    #+#             */
-/*   Updated: 2025/06/27 15:56:51 by ouel-afi         ###   ########.fr       */
+/*   Updated: 2025/07/07 11:58:58 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,8 @@ int	execute_tree(t_tree *node, t_env **envlist, int last_status)
 		char **new_cmd = expand_variables(node->cmd, last_status, *envlist);
 		free_string_array(node->cmd);
 		node->cmd = new_cmd;
-
-		printf("Expanded command:\n");
-		for (int i = 0; node->cmd[i]; i++)
-    		printf("cmd[%d] = '%s'\n", i, node->cmd[i]);
-
-		// if (!node->cmd)
-		// 	return (1);
+		if (!node->cmd)
+			return (1);
 		if (is_builtin(node->cmd[0]))
 			return (execute_builtin(node, envlist));
 		else
