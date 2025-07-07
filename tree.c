@@ -6,7 +6,7 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 10:51:02 by taya              #+#    #+#             */
-/*   Updated: 2025/07/07 11:58:58 by taya             ###   ########.fr       */
+/*   Updated: 2025/07/07 13:23:43 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	execute_tree(t_tree *node, t_env **envlist, int last_status)
 	status = 0;
 	if (!node)
 		return (1);
+	process_heredocs_tree(node);
 	if (node->type == PIPE)
 		return (execute_pipe(node, envlist, last_status));
 	else if (node->type == CMD || node->type == DOUBLE_QUOTE)

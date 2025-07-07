@@ -6,7 +6,7 @@
 /*   By: taya <taya@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 10:51:14 by taya              #+#    #+#             */
-/*   Updated: 2025/07/07 13:05:30 by taya             ###   ########.fr       */
+/*   Updated: 2025/07/07 13:20:05 by taya             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ int	execute_cmd(char **cmds, t_env *envlist, t_tree *node)
 	char	**env_array;
 	int		redir_result;
 
+	if (!cmds || !cmds[0] || cmds[0][0] == '\0')
+		return (0);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -100,8 +102,7 @@ int	execute_cmd(char **cmds, t_env *envlist, t_tree *node)
 			redir_result = handle_redirection(node);
 			if (redir_result != 0)
 				exit(redir_result);
-		}
-		
+		}	
 		full_path = find_cmd_path(cmds[0], &envlist);
 		if (!full_path)
 		{
@@ -133,6 +134,5 @@ int	execute_cmd(char **cmds, t_env *envlist, t_tree *node)
 		return (WEXITSTATUS(status));
 	else if (WIFSIGNALED(status))
 		return (128 + WTERMSIG(status));
-	
 	return (1);
 }
